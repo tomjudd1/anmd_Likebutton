@@ -1,0 +1,17 @@
+html, body {
+	width: 100%;
+	height: 100%;
+	background-color: black;
+}
+
+.canvas {
+	width: 100%; 
+	height: 100%; 
+	position:absolute; 
+	top:0px; 
+	left:0px; 
+	z-index: 1;
+
+}
+
+// add remove mobile highlight code here
