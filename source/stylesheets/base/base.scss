@@ -11,9 +11,29 @@
 @import "bourbon";
 
 body {
-
+	
   // Checks bourbon is running
-  //@include transition(all 0.4s);
+  @include transition(all 4s);
+
+  canvas{
+
+  	z-index:-1;
+
+  }
+
+  #fb{
+  	position:absolute;
+  	top:75%;
+  	left: 50%;
+  }
+
+
+  .fb-like{
+  	display:inline;
+  	float: left;
+  	left:-24px;
+  	z-index:4;
+  }
 
 }
 

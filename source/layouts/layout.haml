@@ -11,5 +11,28 @@
     = yield_content(:stylesheets)
 
   %body{class: page_classes, :onload => "init(); animate();"}
+    #fb-root
+    :javascript
+      (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1&appId=194703243959853";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+
+   
+
+    #fb
+      %fb:like{:font => "arial", :href => "http://www.facebook.com/animadetv", :layout => "box_count", :send => "false", :show_faces => "false", :width => "48"}
+      #fb-root
+        %script{:src => "http://connect.facebook.net/en_GB/all.js#xfbml=1"}
+        :javascript
+          FB.Event.subscribe('edge.create', function(href, widget) {
+            liked();
+          });
+          FB.Event.subscribe('edge.remove', function(href, widget) {
+            
+          });
 
     = yield

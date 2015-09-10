@@ -3,11 +3,13 @@
 //= require "jquery.transit"
 //= require "EaselJS"
 //= require "SoundJS"
-//= require "TweenJS"
+//= require "tweenjs"
 //= require "PreloadJS"
 //= require "threejs"
+//= require "buzz.min"
 //= require "threejs/examples/js/loaders/OBJLoader"
 //= require "3D"
+
 
 // -------------------------------------------------
 //
@@ -42,6 +44,11 @@
       // run 3d man code
       console.log('Welcom to 3D like button');
 
+
+
+    
+
+        
     }
 
   };
