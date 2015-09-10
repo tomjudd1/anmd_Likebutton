@@ -13,7 +13,7 @@
 body {
 	
   // Checks bourbon is running
-  @include transition(all 4s);
+  @include transition(all 6s);
 
   canvas{
 
@@ -21,18 +21,36 @@ body {
 
   }
 
+
+  #title{
+
+    h1{
+      font-size:16pt;
+      color:#cccc66;
+    }
+    
+    @include transform(translateX(-50%));
+    position:absolute;
+    top:10%;
+    left: 50%;
+    text-align:center;
+  }
+
+
   #fb{
+    @include transform(translateX(-50%));
   	position:absolute;
   	top:75%;
   	left: 50%;
   }
 
 
-  .fb-like{
-  	display:inline;
-  	float: left;
-  	left:-24px;
-  	z-index:4;
+  #twitter{
+    display:none;
+    @include transform(translateX(-50%));
+    position:absolute;
+    top:92.5%;
+    left: 50%;
   }
 
 }

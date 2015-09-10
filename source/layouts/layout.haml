@@ -4,8 +4,30 @@
     %meta{charset: "utf-8"}/
     %meta{content: "IE=edge,chrome=1", "http-equiv" => "X-UA-Compatible"}/
 
+
+    / Facebook
+    %meta{:content => "Animade - Like Button 3D!", :property => "og:title"}/
+    %meta{:content => "An interactive characterful like button", :property => "og:description"}/
+    %meta{:content => "https://s3.amazonaws.com/animade/projects/tomjudd/tjudd.jpg", :property => "og:image"}/
+    %meta{:content => "http://like.animade.tv", :property => "og:url"}/
+    %meta{:content => "183650388358020", :property => "fb:app_id"}/
+    / Twitter
+    %meta{:content => "summary", :name => "twitter:card"}/
+    %meta{:content => "@animadetv", :name => "twitter:site"}/
+    %meta{:content => "@animadetv", :name => "twitter:creator"}/
+    %meta{:content => "http://like.animade.tv", :name => "twitter:url"}/
+    %meta{:content => "Tom Judd", :name => "twitter:title"}/
+    %meta{:content => "Animator, creative coder and co-founder of Animade", :name => "twitter:description"}/
+    %meta{:content => "https://s3.amazonaws.com/animade/projects/tomjudd/tjudd.jpg", :name => "twitter:image"}/
+    / Turn off Google Translate
+    %meta{:name => "google", :value => "notranslate"}/
+    / Disable automatic detection and formatting of possible phone numbers in Safari on iOS
+    %meta{:content => "telephone=no", :name => "format-detection"}/
+
+
+
     %title
-      = current_page.data.title || "Page Title"
+      = current_page.data.title || "Animade - Like Button 3D!"
 
     = yield_content(:javascripts)
     = yield_content(:stylesheets)
@@ -22,6 +44,10 @@
       }(document, 'script', 'facebook-jssdk'));
 
    
+    #title
+      %h1
+        Animade is an animation and interactive design studio.
+        It would make us very happy if you liked us.
 
     #fb
       %fb:like{:font => "arial", :href => "http://www.facebook.com/animadetv", :layout => "box_count", :send => "false", :show_faces => "false", :width => "48"}
@@ -34,5 +60,10 @@
           FB.Event.subscribe('edge.remove', function(href, widget) {
             
           });
+
+    #twitter
+      %a.twitter-share-button{"data-dnt" => "true", "data-hashtags" => "smile", "data-related" => "tomjudd1", "data-size" => "large", "data-via" => "animadetv", :href => "https://twitter.com/share"} Tweet
+      :javascript
+        !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
 
     = yield

@@ -703,7 +703,7 @@ function liked(){
   if(isLiked == false){
     new TWEEN.Tween( head.position ).to( {
       x: head.position.x,
-      y: head.position.y + 20,
+      y: head.position.y + 10,
       z: head.position.z + 550}, 1000 )
       .easing( TWEEN.Easing.Elastic.Out).start();
 
@@ -721,6 +721,8 @@ function liked(){
   mySound.stop()
 
   $("#fb").hide();
+  $("#title").hide();
+  $("#twitter").show();
 
   isLiked = true;
   console.log("liked!!!");
