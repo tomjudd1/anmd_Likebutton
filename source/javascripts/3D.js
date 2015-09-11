@@ -33,36 +33,45 @@ var headSize, eyeSize, pupilSize, eyeGap;
 var bodyYEnd = -150;
 var bodyYStart = bodyYEnd - 300;
 
+var headPositionZ;
+var headPositionZLiked = 550;
+var bodyPositionZ = -360;
+
 // an array to store our particles in
 var particles = [];
 
-document.addEventListener( 'mousemove', onDocumentMouseMove, false );
-document.addEventListener( 'mousedown', onDocumentMouseDown, false );
-document.addEventListener( 'mouseout', onDocumentMouseOut, false );
-
-
-// Sound!!!
-var mySound = new buzz.sound( "/library/Sound/pop_loop", {
-  formats: [ "ogg", "mp3", "aac" ]
-});
-
-mySound.play()
-  .fadeIn()
-  .loop()
-;
-
-var crazyMusic = new buzz.sound( "/library/Sound/crazy_loop", {
-  formats: [ "ogg", "mp3", "aac" ]
-});
-
-var boom = new buzz.sound( "/library/Sound/boom", {
-  formats: [ "ogg", "mp3", "aac" ]
-});
-
-
+// sound
+var mySound;
+var crazyMusic;
+var boom;
 
 // Init
 function init() {
+ 
+  if (!Modernizr.touch){
+    document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+    document.addEventListener( 'mousedown', onDocumentMouseDown, false );
+    document.addEventListener( 'mouseout', onDocumentMouseOut, false );
+
+    // Sound!!!
+    mySound = new buzz.sound( "/library/Sound/pop_loop", {
+      formats: [ "ogg", "mp3", "aac" ]
+    });
+
+    // mySound.play()
+    //   .fadeIn()
+    //   .loop()
+    // ;
+
+    crazyMusic = new buzz.sound( "/library/Sound/crazy_loop", {
+      formats: [ "ogg", "mp3", "aac" ]
+    });
+
+    boom = new buzz.sound( "/library/Sound/boom", {
+      formats: [ "ogg", "mp3", "aac" ]
+    });
+
+  }
 
 
   container = document.createElement( 'div' );
@@ -159,7 +168,7 @@ function init() {
   var bodyGeometry = new THREE.CylinderGeometry(headSize*2.52, headSize*3, headSize*9, circSegs, circSegs, false);
   body = new THREE.Mesh( bodyGeometry, skinMaterial );
   body.position.x = 0;
-  body.position.z = -360;
+  body.position.z = bodyPositionZ;
   body.position.y = bodyYStart;
   body.receiveShadow = true;
   body.visible = false;
@@ -168,6 +177,7 @@ function init() {
   head = new THREE.Mesh( headGeometry, skinMaterial );
   head.position.x = 0;
   head.position.z = headSize*2;
+  headPositionZ = head.position.z;
   head.position.y = 130;
   head.castShadow = true;
   head.receiveShadow = true;
@@ -473,6 +483,17 @@ function onDocumentMouseMove(event) {
   
 }
 
+function onDocumentTouchMove(event) {
+  mouseOut = false;
+
+  mouseX = ( event.clientX - windowHalfX );
+  mouseY = ( event.clientY - windowHalfY );
+
+  calculateFollowPoint(event.clientX , event.clientY);
+
+  
+}
+
 function onDocumentMouseOut(event) {
   mouseOut = true;
 }
@@ -681,14 +702,18 @@ function render() {
     //rEye.scale.y += bob/6;
     body.position.y = bodyYEnd + bob*4;
     body.rotation.y = (bob/1000);
+
+    var bob2 = Math.sin(time*14.8)*10;
+    var bob3 = Math.sin(time*7.5)*10;
+
+    body.position.z = bodyPositionZ + bob2*4;   
+    //body.rotation.z = bob3 / 100;   
+
   }
 
   camera.lookAt( mouth.position );
 
-
   renderer.render( scene, camera );
-
-
 
 }
 
@@ -698,13 +723,19 @@ function resize() {
 }
 
 function liked(){
+
+  // ANALYTICS
+  ga('send', 'event', 'Social Event', 'liked');
+
+
   makeParticles(); 
+
 
   if(isLiked == false){
     new TWEEN.Tween( head.position ).to( {
       x: head.position.x,
       y: head.position.y + 10,
-      z: head.position.z + 550}, 1000 )
+      z: headPositionZ + headPositionZLiked}, 1000 )
       .easing( TWEEN.Easing.Elastic.Out).start();
 
     mySound.setSpeed(4);
@@ -713,11 +744,10 @@ function liked(){
 
   crazyMusic.play()
     .loop()
-    ;
+    .fadeOut()
+  ;
 
   boom.play()
-
-
   mySound.stop()
 
   $("#fb").hide();
@@ -726,7 +756,20 @@ function liked(){
 
   isLiked = true;
   console.log("liked!!!");
+
+  // Start 5 delay before fading to final screen
+  // add event to kill canvas and show call to action
+  $( "canvas" ).delay( 4000 ).fadeOut( 500 );
+
 }
+
+function unliked(){
+
+  // ANALYTICS
+  ga('send', 'event', 'Social Event', 'unliked');
+
+}
+
 
 
 

@@ -8,8 +8,8 @@
 //= require "threejs"
 //= require "buzz.min"
 //= require "threejs/examples/js/loaders/OBJLoader"
+//= require "run"
 //= require "3D"
-
 
 // -------------------------------------------------
 //
@@ -17,42 +17,3 @@
 // 
 // -------------------------------------------------
 
-(function() {
-
-  "use strict";
-
-  var Piece = function() {
-
-    var self = this;
-
-    self.init();
-
-  };
-
-  Piece.prototype = {
-
-    // -------------------------------------------------
-    //
-    // Initial scene setup
-    // 
-    // -------------------------------------------------
-
-    init: function() {
-
-      var self = this;
-      
-      // run 3d man code
-      console.log('Welcom to 3D like button');
-
-
-
-    
-
-        
-    }
-
-  };
-
-  new Piece();
-
-})();

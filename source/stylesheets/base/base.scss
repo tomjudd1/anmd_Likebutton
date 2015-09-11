@@ -5,6 +5,8 @@
 //
 //
 
+$linkColor: #ff99ff;
+
 @import "../../bower_components/normalize-css/normalize";
 
 // Installed as a gem for lots of annoying reasons
@@ -12,8 +14,20 @@
 
 body {
 	
-  // Checks bourbon is running
-  @include transition(all 6s);
+  font-family: Europa, Avenir, sans-serif;
+
+  
+  h1{
+    line-height: 1.5em;
+    font-size:1em;
+    font-weight: 400;
+  }
+
+  h3{
+    line-height: 0em;
+    font-size:0.55em;
+    font-weight: 400;
+  }
 
   canvas{
 
@@ -21,12 +35,14 @@ body {
 
   }
 
+  $cpuColour: #ffffff;
 
   #title{
 
+    display:none;
+
     h1{
-      font-size:16pt;
-      color:#cccc66;
+      letter-spacing: .02em;
     }
     
     @include transform(translateX(-50%));
@@ -38,19 +54,99 @@ body {
 
 
   #fb{
+    display:none;
     @include transform(translateX(-50%));
   	position:absolute;
+    height:61px;
+    width:48px;
+    overflow: hidden;
   	top:75%;
   	left: 50%;
   }
 
 
+  #about{
+    display:inline;
+    @include transform(translateX(-50%));
+    position:absolute;
+    overflow: hidden;
+    //background-color: black;
+    width:auto;
+    top:92.5%;
+    right: 0%;
+    color: #ffffff;
+
+      a{
+        color: $linkColor;
+      }
+      a:hover{
+        border-bottom: none;
+      }
+  }
+
   #twitter{
     display:none;
     @include transform(translateX(-50%));
     position:absolute;
+    height: 50px;
     top:92.5%;
     left: 50%;
+  }
+
+  #noMouse{
+
+
+    $cpuWidth: 400px;
+    $cpuScreenBorder: 10px;
+    $cpuStalkWidth: 40px;
+    $cpuStalkHeight: 40px;
+    $cpuStandWidth: 80px;
+    $cpuStandHeight: 10px;
+
+
+
+    display:none;
+
+    h1{
+      color:$cpuColour;
+
+      a{
+        color: $linkColor;
+      }
+      a:hover{
+        border-bottom: none;
+      }
+    }
+
+    @include transform(translateY(-50%) translateX(-50%));
+    position:absolute;
+    width:400px;
+    top:50%;
+    left: 50%;
+    text-align:center;
+
+
+    #demo-header{
+      display:inline;
+      float:left;
+      width:$cpuWidth;
+      height:26px;
+      background-image: url("../../library/gifs/demo-header.png");
+      background-color:none;
+     
+    }
+
+    #demo{
+      display:inline;
+      float:left;
+      width:$cpuWidth;
+      height:249px;
+      background-image: url("../../library/gifs/demo.gif");
+      background-color:none;
+      margin-bottom: 40px;
+     
+    }
+
   }
 
 }
