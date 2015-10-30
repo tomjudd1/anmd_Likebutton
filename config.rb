@@ -32,10 +32,14 @@ end
 
 # Deploy site to github pages
 activate :deploy do |deploy|
-  
+
   deploy.build_before = true
 
-  deploy.method = :git
+  deploy.method = :rsync
+  deploy.host   = 'chambersjudd.com'
+  deploy.path   = 'like3d.animade.tv/public/htdocs/'
+  deploy.user = 'admin'
+  deploy.password = '1b1sh0p'
   # Optional Settings
   # deploy.remote   = 'custom-remote' # remote name or git url, default: origin
   # deploy.branch   = 'custom-branch' # default: gh-pages

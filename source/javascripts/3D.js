@@ -48,26 +48,37 @@ var boom;
 // Init
 function init() {
  
+  // Mute button
+  var $muteButton = $('#mute-button');
+
+  $muteButton.on("click", function() {
+
+    $muteButton.toggleClass('muted');
+
+    if ($muteButton.hasClass('muted')) {
+      buzz.all().mute();
+    } else {
+      buzz.all().unmute();
+    }
+
+  });
+
   if (!Modernizr.touch){
     document.addEventListener( 'mousemove', onDocumentMouseMove, false );
     document.addEventListener( 'mousedown', onDocumentMouseDown, false );
     document.addEventListener( 'mouseout', onDocumentMouseOut, false );
 
     // Sound!!!
-    mySound = new buzz.sound( "/library/Sound/pop_loop", {
+    mySound = new buzz.sound( "/library/Sound/clickBeat", {
       formats: [ "ogg", "mp3", "aac" ]
     });
 
-    // mySound.play()
-    //   .fadeIn()
-    //   .loop()
-    // ;
+    mySound.play()
+      .fadeIn()
+      .loop()
+    ;
 
     crazyMusic = new buzz.sound( "/library/Sound/crazy_loop", {
-      formats: [ "ogg", "mp3", "aac" ]
-    });
-
-    boom = new buzz.sound( "/library/Sound/boom", {
       formats: [ "ogg", "mp3", "aac" ]
     });
 
@@ -303,7 +314,7 @@ function init() {
       object.traverse( function ( child ) {
         if ( child instanceof THREE.Mesh ) {
           child.material = wallMaterial;
-
+          $( "#cover" ).delay(100).fadeOut( 500 );
         }
       } );
 
@@ -466,8 +477,6 @@ function onWindowResize() {
 
 }
 function onDocumentMouseDown(event){
-    liked();
-    //blink();
 
     onDocumentMouseMove(event);
 }
@@ -522,7 +531,7 @@ function calculateFollowPoint(xPos, yPos){
       distanceFromGoal = distanceMax;
     }
 
-    if(distanceFromGoal > 80){
+    if(distanceFromGoal > 60){
       offScreen = true;
     }else{
       offScreen = false;
@@ -727,6 +736,10 @@ function liked(){
   // ANALYTICS
   ga('send', 'event', 'Social Event', 'liked');
 
+  document.removeEventListener( 'mousemove', onDocumentMouseMove);
+
+  calculateFollowPoint(windowHalfX , windowHalfY*1.60);
+
 
   makeParticles(); 
 
@@ -747,20 +760,23 @@ function liked(){
     .fadeOut()
   ;
 
-  boom.play()
   mySound.stop()
 
   $("#fb").hide();
   $("#title").hide();
-  $("#twitter").show();
+
 
   isLiked = true;
   console.log("liked!!!");
 
   // Start 5 delay before fading to final screen
   // add event to kill canvas and show call to action
-  $( "canvas" ).delay( 4000 ).fadeOut( 500 );
-
+  $( "canvas" ).delay( 4000 ).fadeOut( 1500 , function() {
+    $( "canvas" ).remove();  
+  });
+  $('#mute-button').delay( 5000 ).fadeOut( 500 );
+  $("#callToAction").delay( 5500 ).fadeIn( 500 );
+  $("#twitter").delay( 5500 ).fadeIn( 500 );
 }
 
 function unliked(){

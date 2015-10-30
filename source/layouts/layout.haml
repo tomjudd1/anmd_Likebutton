@@ -7,19 +7,19 @@
       :javascript
         try{Typekit.load({ async: true });}catch(e){}
     / Facebook
-    %meta{:content => "Animade - Like Button 3D!", :property => "og:title"}/
-    %meta{:content => "An interactive characterful like button", :property => "og:description"}/
-    %meta{:content => "https://s3.amazonaws.com/animade/projects/tomjudd/tjudd.jpg", :property => "og:image"}/
-    %meta{:content => "http://www.animade.tv/like", :property => "og:url"}/
+    %meta{:content => "Like Button 3D!", :property => "og:title"}/
+    %meta{:content => "A like button that really, really wants to make friends with you—from Animade.", :property => "og:description"}/
+    %meta{:content => "https://s3.amazonaws.com/animade/projects/Like3D/like3D_Facebook.png", :property => "og:image"}/
+    %meta{:content => "http://like3d.animade.tv", :property => "og:url"}/
     %meta{:content => "183650388358020", :property => "fb:app_id"}/
     / Twitter
     %meta{:content => "summary", :name => "twitter:card"}/
     %meta{:content => "@animadetv", :name => "twitter:site"}/
     %meta{:content => "@animadetv", :name => "twitter:creator"}/
-    %meta{:content => "http://www.animade.tv/like", :name => "twitter:url"}/
+    %meta{:content => "http://like3d.animade.tv", :name => "twitter:url"}/
     %meta{:content => "Animade", :name => "twitter:title"}/
-    %meta{:content => "Animator, creative coder and co-founder of Animade", :name => "twitter:description"}/
-    %meta{:content => "https://s3.amazonaws.com/animade/projects/tomjudd/tjudd.jpg", :name => "twitter:image"}/
+    %meta{:content => "A like button that really, really wants to make friends with you—from Animade.", :name => "twitter:description"}/
+    %meta{:content => "https://s3.amazonaws.com/animade/projects/Like3D/like3D_Facebook.png", :name => "twitter:image"}/
     / Turn off Google Translate
     %meta{:name => "google", :value => "notranslate"}/
     / Disable automatic detection and formatting of possible phone numbers in Safari on iOS
@@ -40,6 +40,9 @@
     = yield_content(:stylesheets)
 
   %body{class: page_classes, :onload => "run(); animate();"}
+    #cover
+      #loader
+
     #fb-root
     :javascript
       (function(d, s, id) {
@@ -55,18 +58,28 @@
     //    Animade is an animation and interactive design studio.
     //    It would make us very happy if you liked us.
 
+    #callToAction
+      %h1
+        Thank you for liking Animade. This is the latest iteration of our characterful like button. You can read more about its creation
+        %a{:href => "http://animade.tv/work/like-3d"}here. 
+
     #noMouse
       #demo-header
       #demo
       %h1
-        This webtoy is made for big computers with mice. Email yourself the
-        %a{:href => "mailto:?subject=Animade Like 3D&body=Try this webtoy by Animade -> http://www.animade.tv/like"}link
-        and have a play when you're not on the move.
+        This web-toy is made for big computers. Email yourself the
+        %a{:href => "mailto:?subject=Animade Like 3D&body=Try this webtoy by Animade -> http://like3d.animade.tv"}link
+        and have a play when you're not on the move. Find out more about Like3D 
+        %a{:href => "http://animade.tv/work/like-3d"}here. 
+
+    %div#mute-button
 
     #about
-      %h3
-        A webtoy by 
-        %a{:href => "http://animade.tv"}Animade
+      %a{:href => "http://animade.tv"}
+        %img{:src => "../library/img/900x196-mono-black-logo.png"}
+      //%h3900x196-mono-black-logo
+      //  A web-toy by 
+      //  %a{:href => "http://animade.tv"}Animade
 
     #fb
       %fb:like{:font => "arial", :href => "http://www.facebook.com/animadetv", :layout => "box_count", :send => "false", :show_faces => "false", :width => "48"}
@@ -78,7 +91,7 @@
           });
 
     #twitter
-      %a.twitter-share-button{"data-dnt" => "true", "data-hashtags" => "smile", "data-related" => "tomjudd1", "data-size" => "large", "data-via" => "animadetv", :href => "https://twitter.com/share"} Tweet
+      %a.twitter-share-button{"data-dnt" => "true", "data-hashtags" => "AnimadeSmile", "data-related" => "tomjudd1", "data-size" => "small", "data-text" => "You might like this!", "data-via" => "animadetv", :href => "https://twitter.com/share"} Tweet
       :javascript
         !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
 
